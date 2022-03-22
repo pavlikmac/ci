@@ -16,6 +16,7 @@ sudo ln -s /srv/mer/targets/SailfishOS-$SAILFISH_VERSION-$PORT_ARCH /srv/mer/tar
 sudo ln -s /srv/mer/toolings/SailfishOS-$SAILFISH_VERSION /srv/mer/toolings/$VENDOR-$DEVICE
 
 # 3.3.0.16 hack
+sudo zypper in -y kmod 
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R chmod 777 /boot
 
 sdk-assistant list
@@ -25,8 +26,8 @@ rpm/dhd/helpers/build_packages.sh -d
 
 
 # we do not build gst-droid and gmp-droid, skip them
-sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gst-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
-sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gmp-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
+#sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gst-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
+#sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gmp-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
 rpm/dhd/helpers/build_packages.sh -g
 
 cat /home/nemo/work/hadk_14.1/droid-hal-$DEVICE.log

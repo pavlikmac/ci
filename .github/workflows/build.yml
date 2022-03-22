@@ -22,7 +22,7 @@ jobs:
       DEVICE: vince
       VENDOR: xiaomi
       ANDROID_ROOT: /home/runner/work/hadk_14.1/
-      SAILFISH_SKD_VERSION: 4.0.1.45
+      SAILFISH_SDK_VERSION: 4.3.0.12
 
     steps:
     - name: Checkout
@@ -86,8 +86,8 @@ jobs:
         rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
         chmod +x build-rpm.sh
         sudo docker images|grep -v REPOSITORY|awk '{print $3}'|xargs docker rmi
-        sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SKD_VERSION
-        sudo docker run -v /home/runner/work:/home/nemo/work coderus/sailfishos-platform-sdk:$SAILFISH_SKD_VERSION /bin/sh /home/nemo/work/ci/ci/build-rpm.sh
+        sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
+        sudo docker run -v /home/runner/work:/home/nemo/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/nemo/work/ci/ci/build-rpm.sh
       shell: bash
 
     - name: Check free disk
