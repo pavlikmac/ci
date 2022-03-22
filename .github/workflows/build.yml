@@ -59,7 +59,7 @@ jobs:
         source hadk.env
         mkdir -p $ANDROID_ROOT
         cd $ANDROID_ROOT
-        repo init -u git://github.com/mer-hybris/android.git -b hybris-14.1 --depth=1
+        repo init -u https://github.com/mer-hybris/android.git -b hybris-14.1 --depth=1
         repo sync -j8 -c --no-clone-bundle --no-tags
     
     - name: Clone device spec source
