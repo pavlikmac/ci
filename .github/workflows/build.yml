@@ -48,6 +48,8 @@ jobs:
         sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac 300  
         sudo update-alternatives --install /usr/bin/javah javah /usr/lib/jvm/java-8-openjdk-amd64/bin/javah 300
         sudo update-alternatives --install /usr/bin/jar jar /usr/lib/jvm/java-8-openjdk-amd64/bin/jar 300
+        java -version
+        update-alternatives --query javac
 
 
     - name: Download repo bin file
@@ -79,8 +81,6 @@ jobs:
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-vince.git $ANDROID_ROOT/hybris/droid-hal-version-vince
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
-        rm -rf $ANDROID_ROOT/external/audioflingerglue
-        git clone https://github.com/mer-hybris/audioflingerglue.git $ANDROID_ROOT/external/audioflingerglue
 
     - name: Build HAL
       run: |

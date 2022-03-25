@@ -13,7 +13,7 @@ echo 'FORCE_HAL:=1' >> external/droidmedia/env.mk
 echo 'MINIMEDIA_AUDIOPOLICYSERVICE_ENABLE := 1' >> external/droidmedia/env.mk
 echo 'AUDIOPOLICYSERVICE_ENABLE := 1' >> external/droidmedia/env.mk
 
-make -j$(nproc --all) hybris-hal $(external/droidmedia/detect_build_targets.sh $PORT_ARCH $(gettargetarch))
+make -j$(nproc --all) hybris-hal droidmedia
 
 # Add vince lost libs
 cp device/xiaomi/vince/lostlibs/*.so out/target/product/vince/system/lib/
