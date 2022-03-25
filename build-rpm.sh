@@ -2,10 +2,10 @@
 
 set -x
 
-source /home/nemo/work/ci/ci/hadk.env
-export ANDROID_ROOT=/home/nemo/work/hadk_14.1
+source /home/mersdk/work/ci/ci/hadk.env
+export ANDROID_ROOT=/home/mersdk/work/hadk_14.1
 
-sudo chown -R nemo:nemo $ANDROID_ROOT
+sudo chown -R mersdk:mersdk $ANDROID_ROOT
 cd $ANDROID_ROOT
 
 cd ~/.scratchbox2
@@ -30,4 +30,4 @@ rpm/dhd/helpers/build_packages.sh -d
 #sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gmp-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
 rpm/dhd/helpers/build_packages.sh -g
 
-cat /home/nemo/work/hadk_14.1/droid-hal-$DEVICE.log
+cat /home/mersdk/work/hadk_14.1/droid-hal-$DEVICE.log

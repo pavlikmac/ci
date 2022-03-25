@@ -89,7 +89,7 @@ jobs:
         rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
         chmod +x build-rpm.sh
         sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
-        sudo docker run -v /home/runner/work:/home/nemo/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/nemo/work/ci/ci/build-rpm.sh
+        sudo docker run -v /home/runner/work:/home/mersdk/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/mersdk/work/ci/ci/build-rpm.sh
       shell: bash
 
     - name: Check free disk
