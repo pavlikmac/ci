@@ -17,7 +17,7 @@ sudo ln -s /srv/mer/toolings/SailfishOS-$SAILFISH_VERSION /srv/mer/toolings/$VEN
 
 # 3.3.0.16 hack
 sudo zypper in -y kmod 
-sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R chmod 777 /boot
+#sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R chmod 777 /boot
 
 sdk-assistant list
 
