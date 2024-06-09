@@ -37,11 +37,6 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@master
-
-    - name: Set up Python 2.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 2.7
         
     - name: Initialization environment
       run: |
@@ -89,6 +84,7 @@ jobs:
     - name: Build HAL
       run: |
         chmod +x build-hal.sh
+        cd build/tools && rm check_radio_versions.py && wget https://android.googlesource.com/platform/build/+/HEAD/tools/check_radio_versions.py
         bash build-hal.sh
       shell: bash
 
