@@ -37,7 +37,12 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@master
-    
+
+    - name: Set up Python 2.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 2.7
+        
     - name: Initialization environment
       run: |
         sudo apt-get update
