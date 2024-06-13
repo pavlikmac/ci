@@ -21,7 +21,7 @@ jobs:
     env:
       DEVICE: vince
       VENDOR: xiaomi
-      ANDROID_ROOT: /home/runner/work/hadk_14.1/
+      ANDROID_ROOT: /home/runner/work/ci/ci/hadk_14.1/
       SAILFISH_SDK_VERSION: 4.3.0.12
 
     steps:
@@ -70,7 +70,7 @@ jobs:
     - name: Clone device spec source
       run: |
         source hadk.env
-        git clone https://github.com/Sailfish-On-Vince/device_xiaomi_vince.git $ANDROID_ROOT/device/xiaomi/vince --depth=1
+        git clone https://github.com/Sailfish-On-Vince/device_xiaomi_vince.git $ANDROID_ROOT/device/xiaomi/vince --depth=1 
         git clone https://github.com/Sailfish-On-Vince/vendor_xiaomi_vince.git $ANDROID_ROOT/vendor/xiaomi/vince --depth=1
         git clone https://github.com/Sailfish-On-Vince/Xiaomi_Kernel_OpenSource.git $ANDROID_ROOT/kernel/xiaomi/msm8953 --depth=1
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
@@ -80,11 +80,6 @@ jobs:
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-vince.git $ANDROID_ROOT/hybris/droid-hal-version-vince
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
-        cd $ANDROID_ROOT/external/droidmedia
-        echo 'DROIDMEDIA_32 := true' > env.mk
-        echo 'FORCE_HAL:=1' >> env.mk
-        echo 'MINIMEDIA_AUDIOPOLICYSERVICE_ENABLE:=1' >> env.mk
-        echo 'AUDIOPOLICYSERVICE_ENABLE:=1' >> env.mk
 
     - name: Build HAL
       run: |
