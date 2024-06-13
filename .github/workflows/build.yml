@@ -93,7 +93,6 @@ jobs:
         echo "clean more folders"
         rm -rf $ANDROID_ROOT/prebuilts $ANDROID_ROOT/external/chromium* $ANDROID_ROOT/tools $ANDROID_ROOT/packages
         rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
-        rm -rf $ANDROID_ROOT/hardware $ANDROID_ROOT/system $ANDROID_ROOT/vendor $ANDROID_ROOT/system $ANDROID_ROOT/kernel
         chmod +x build-rpm.sh
         sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
         sudo docker run -v /home/runner/work:/home/mersdk/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/mersdk/work/ci/ci/build-rpm.sh
@@ -108,11 +107,11 @@ jobs:
     - name : Upload boot image
       uses: actions/upload-artifact@master
       with:
-        name: hybris-boot.img
+        name: hybris-boot.img.zip
         path: ${{env.ANDROID_ROOT}}/out/target/product/${{env.DEVICE}}/hybris-boot.img
 
     - name : Upload droid-local-repo
       uses: actions/upload-artifact@master
       with:
-        name: droid-local-repo
+        name: droid-local-repo.zip
         path: ${{env.ANDROID_ROOT}}/droid-local-repo
