@@ -80,6 +80,11 @@ jobs:
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-vince.git $ANDROID_ROOT/hybris/droid-hal-version-vince
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
+        cd $ANDROID_ROOT/external/droidmedia
+        echo 'DROIDMEDIA_32 := true' > env.mk
+        echo 'FORCE_HAL:=1' >> env.mk
+        echo 'MINIMEDIA_AUDIOPOLICYSERVICE_ENABLE:=1' >> env.mk
+        echo 'AUDIOPOLICYSERVICE_ENABLE:=1' >> env.mk
 
     - name: Build HAL
       run: |
@@ -88,21 +93,22 @@ jobs:
         bash build-hal.sh
       shell: bash
 
-    # - name: Build dhd in container
-    #   run: |
-    #     echo "clean more folders"
-    #     rm -rf $ANDROID_ROOT/prebuilts $ANDROID_ROOT/external/chromium* $ANDROID_ROOT/tools/external/gradle $ANDROID_ROOT/packages
-    #     rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
-    #     chmod +x build-rpm.sh
-    #     sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
-    #     sudo docker run -v /home/runner/work:/home/mersdk/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/mersdk/work/ci/ci/build-rpm.sh
-    #   shell: bash
+    - name: Build dhd in container
+      run: |
+        echo "clean more folders"
+        rm -rf $ANDROID_ROOT/prebuilts $ANDROID_ROOT/external/chromium* $ANDROID_ROOT/tools $ANDROID_ROOT/packages
+        rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
+        rm -rf $ANDROID_ROOT/hardware $ANDROID_ROOT/system $ANDROID_ROOT/vendor $ANDROID_ROOT/system $ANDROID_ROOT/kernel
+        chmod +x build-rpm.sh
+        sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
+        sudo docker run -v /home/runner/work:/home/mersdk/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/mersdk/work/ci/ci/build-rpm.sh
+      shell: bash
 
-    # - name: Check free disk
-    #   if: failure()
-    #   run: |
-    #     df -h
-    #   shell: bash
+    - name: Check free disk
+      if: failure()
+      run: |
+        df -h
+      shell: bash
 
     - name : Upload boot image
       uses: actions/upload-artifact@master
@@ -110,8 +116,8 @@ jobs:
         name: hybris-boot.img
         path: ${{env.ANDROID_ROOT}}/out/target/product/${{env.DEVICE}}/hybris-boot.img
 
-    # - name : Upload droid-local-repo
-    #   uses: actions/upload-artifact@master
-    #   with:
-    #     name: droid-local-repo
-    #     path: ${{env.ANDROID_ROOT}}/droid-local-repo
+    - name : Upload droid-local-repo
+      uses: actions/upload-artifact@master
+      with:
+        name: droid-local-repo
+        path: ${{env.ANDROID_ROOT}}/droid-local-repo
