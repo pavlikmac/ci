@@ -22,6 +22,7 @@ sudo zypper in -y kmod
 sdk-assistant list
 
 cd $ANDROID_ROOT
+sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify_kernel_config
 rpm/dhd/helpers/build_packages.sh -d
 
 
