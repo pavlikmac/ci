@@ -3,7 +3,7 @@
 set -x
 
 source /home/mersdk/work/ci/ci/hadk.env
-export ANDROID_ROOT=/home/mersdk/work/hadk_14.1
+export ANDROID_ROOT=/home/mersdk/work/ci/ci/hadk_14.1
 
 sudo chown -R mersdk:mersdk $ANDROID_ROOT
 cd $ANDROID_ROOT
@@ -30,4 +30,4 @@ rpm/dhd/helpers/build_packages.sh -d
 #sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gmp-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
 rpm/dhd/helpers/build_packages.sh -g
 
-cat /home/mersdk/work/hadk_14.1/droid-hal-$DEVICE.log
+cat $ANDROID_ROOT/droid-hal-$DEVICE.log
