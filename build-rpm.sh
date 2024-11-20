@@ -29,8 +29,9 @@ cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 git checkout 0.2.35
 
 cd $ANDROID_ROOT/rpm/dhd
-git apply --whitespace=fix /home/mersdk/work/ci/dhd.patch
+curl -Lo https://github.com/Sailfish-On-Vince/ci/raw/refs/heads/master/dhd.patch
+git apply --whitespace=fix dhd.patch && rm dhd.patch
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh
 
-cat $ANDROID_ROOT/droid-hal-$DEVICE.log
+#cat $ANDROID_ROOT/droid-hal-$DEVICE.log
