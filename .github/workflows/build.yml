@@ -22,7 +22,7 @@ jobs:
       DEVICE: vince
       VENDOR: xiaomi
       ANDROID_ROOT: /home/runner/work/ci/ci/hadk_14.1/
-      SAILFISH_SDK_VERSION: 4.5.0.16
+      SAILFISH_SDK_VERSION: 4.6.0.13
 
     steps:
     - name: Maximize build space
@@ -34,6 +34,21 @@ jobs:
         remove-haskell: 'true'
         remove-android: 'true'
         remove-docker-images: 'true'
+
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
 
     - name: Checkout
       uses: actions/checkout@master
@@ -75,6 +90,7 @@ jobs:
         git clone https://github.com/Sailfish-On-Vince/Xiaomi_Kernel_OpenSource.git $ANDROID_ROOT/kernel/xiaomi/msm8953 --depth=1
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-boot.git $ANDROID_ROOT/hybris/hybris-boot
+        git clone https://github.com/Sailfish-On-Vince/hybris-installer.git $ANDROID_ROOT/hybris/hybris-installer
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-vince.git $ANDROID_ROOT/rpm 
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-config-vince.git $ANDROID_ROOT/hybris/droid-configs
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-vince.git $ANDROID_ROOT/hybris/droid-hal-version-vince
@@ -115,3 +131,9 @@ jobs:
       with:
         name: droid-local-repo.zip
         path: ${{env.ANDROID_ROOT}}/droid-local-repo
+
+    - name : Upload flashable zip
+      uses: actions/upload-artifact@master
+      with:
+        name: sailfishos.zip
+        path: ${{env.ANDROID_ROOT}}/SailfishOScommunity-release-*/sailfishos-*-${{env.DEVICE}}*.zip

@@ -23,12 +23,13 @@ sdk-assistant list
 
 cd $ANDROID_ROOT
 sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify_kernel_config
-rpm/dhd/helpers/build_packages.sh -d
 
+cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
+git checkout 0.2.35
 
-# we do not build gst-droid and gmp-droid, skip them
-#sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gst-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
-#sed -i 's/buildmw -u\ \"https\:\/\/github.com\/sailfishos\/gmp-droid.git\"/echo skip/g' rpm/dhd/helpers/build_packages.sh 
-rpm/dhd/helpers/build_packages.sh -g
+cd $ANDROID_ROOT/rpm/dhd
+git apply --whitespace=fix /home/mersdk/work/ci/ci/dhd.patch
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh
 
 cat $ANDROID_ROOT/droid-hal-$DEVICE.log
