@@ -1,5 +1,14 @@
+From b4cd4944a168a93cb0d56781533b5407d135a7e5 Mon Sep 17 00:00:00 2001
+From: BirdZhang <0312birdzhang@gmail.com>
+Date: Thu, 21 Nov 2024 00:15:13 +0800
+Subject: [PATCH] skip it
+
+---
+ helpers/build_packages.sh | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
 diff --git a/helpers/build_packages.sh b/helpers/build_packages.sh
-index 29ae338..498d656 100755
+index 29ae338..75697c6 100755
 --- a/helpers/build_packages.sh
 +++ b/helpers/build_packages.sh
 @@ -285,19 +285,19 @@ if [ "$BUILDMW" = "1" ]; then
@@ -10,7 +19,11 @@ index 29ae338..498d656 100755
 -            buildmw -u "https://github.com/mer-hybris/geoclue-providers-hybris" \
 -                    -s rpm/geoclue-providers-hybris.spec || die
 -        fi
--        # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself
++        #if [ $android_version_major -le 7 ]; then
++        #    buildmw -u "https://github.com/mer-hybris/geoclue-providers-hybris" \
++        #            -s rpm/geoclue-providers-hybris.spec || die
++        #fi
+         # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself
 -        sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper se kf5bluezqt-bluez4 > /dev/null
 -        ret=$?
 -        if [ $ret -eq 104 ]; then
@@ -19,19 +32,17 @@ index 29ae338..498d656 100755
 -            # pull device's bluez4 configs correctly
 -            sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper remove bluez-configs-mer
 -        fi
-+       if [ $android_version_major -le 7 ]; then
-+           buildmw -u "https://github.com/mer-hybris/geoclue-providers-hybris" \
-+                   -s rpm/geoclue-providers-hybris.spec -N|| die
-+       fi
-+       # # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself
-+       # sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper se kf5bluezqt-bluez4 > /dev/null
-+       # ret=$?
-+       # if [ $ret -eq 104 ]; then
-+       #     buildmw -u "https://github.com/sailfishos/kf5bluezqt.git" \
-+       #             -s rpm/kf5bluezqt-bluez4.spec || die
-+       #     # pull device's bluez4 configs correctly
-+       #     sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper remove bluez-configs-mer
-+       # fi
++        #sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper se kf5bluezqt-bluez4 > /dev/null
++        #ret=$?
++        #if [ $ret -eq 104 ]; then
++        #    buildmw -u "https://github.com/sailfishos/kf5bluezqt.git" \
++        #            -s rpm/kf5bluezqt-bluez4.spec || die
++        #    # pull device's bluez4 configs correctly
++        #    sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper remove bluez-configs-mer
++        #fi
      fi
  fi
  
+-- 
+2.25.1
+
