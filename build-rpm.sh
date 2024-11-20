@@ -24,11 +24,12 @@ sdk-assistant list
 cd $ANDROID_ROOT
 sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify_kernel_config
 
+git clone https://github.com/mer-hybris/geoclue-providers-hybris $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 git checkout 0.2.35
 
 cd $ANDROID_ROOT/rpm/dhd
-git apply --whitespace=fix /home/mersdk/work/ci/ci/dhd.patch
+git apply --whitespace=fix /home/mersdk/work/ci/dhd.patch
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh
 
