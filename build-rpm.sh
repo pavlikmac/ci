@@ -36,6 +36,12 @@ git am --signoff < dhd.patch && rm dhd.patch
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh || true
 rpm/dhd/helpers/build_packages.sh -b hybirs/mw/geoclue-providers-hybris -s rpm/geoclue-providers-hybris.spec
+
+#hack too
+mkdir -p /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/
+cp /home/mersdk/work/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true
+cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true #who is the real path
+
 rpm/dhd/helpers/build_packages.sh -i
 
 #cat $ANDROID_ROOT/droid-hal-$DEVICE.log
