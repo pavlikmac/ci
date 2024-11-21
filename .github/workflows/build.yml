@@ -52,14 +52,20 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@master
-        
+
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: all
+
     - name: Initialization environment
       run: |
         sudo apt-get update
         sudo apt-get install -y \
         openjdk-8-jdk android-tools-adb bc bison \
         build-essential curl flex g++-multilib gcc-multilib gnupg gperf \
-        imagemagick lib32ncurses-dev \
+        imagemagick lib32ncurses-dev qemu-user-static \
         lib32readline-dev lib32z1-dev  liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev \
         libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc yasm zip zlib1g-dev \
         qemu-user-static qemu-system-arm e2fsprogs simg2img \
@@ -74,7 +80,17 @@ jobs:
         git config --global user.name "BirdZhang"
         git config --global user.email "0312birdzhang@gmail.com"
 
+    - name: Cache repo directory
+      uses: actions/cache@v3
+      id: repo-cache
+      with:
+        path: .repo
+        key: repo-${{ github.ref }}
+        restore-keys: |
+          repo-
+
     - name: Downloading source code
+      if: steps.repo-cache.outputs.cache-hit != 'true'
       run: |
         source hadk.env
         mkdir -p $ANDROID_ROOT
@@ -97,6 +113,15 @@ jobs:
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
 
+    - name: Cache build output
+      uses: actions/cache@v3
+      id: build-cache
+      with:
+        path: ${{env.ANDROID_ROOT}}/out
+        key: build-hal-${{ github.ref }}
+        restore-keys: |
+          build-hal-
+
     - name: Build HAL
       run: |
         chmod +x build-hal.sh
@@ -106,9 +131,6 @@ jobs:
 
     - name: Build dhd in container
       run: |
-        echo "clean more folders"
-        rm -rf $ANDROID_ROOT/prebuilts $ANDROID_ROOT/external/chromium* $ANDROID_ROOT/tools $ANDROID_ROOT/packages
-        rm -rf $ANDROID_ROOT/out/build-lineage_vince.ninja
         chmod +x build-rpm.sh
         sudo docker pull coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION
         sudo docker run -v /home/runner/work:/home/mersdk/work coderus/sailfishos-platform-sdk:$SAILFISH_SDK_VERSION /bin/sh /home/mersdk/work/ci/ci/build-rpm.sh
