@@ -28,15 +28,14 @@ git clone https://github.com/mer-hybris/geoclue-providers-hybris $ANDROID_ROOT/h
 cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 git checkout 0.2.35
 
-cd $ANDROID_ROOT/
-rpm/dhd/helpers/build_packages.sh -d
-rpm/dhd/helpers/build_packages.sh -b hybirs/mw/geoclue-providers-hybris -s rpm/geoclue-providers-hybris.spec
-
-
 cd $ANDROID_ROOT/rpm/dhd
 curl -LO https://github.com/Sailfish-On-Vince/ci/raw/refs/heads/master/dhd.patch
+git config --global user.email "ci@github.com"
+git config --global user.name "Github Actions"
 git am --signoff < dhd.patch && rm dhd.patch
 cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh
+rpm/dhd/helpers/build_packages.sh || true
+rpm/dhd/helpers/build_packages.sh -b hybirs/mw/geoclue-providers-hybris -s rpm/geoclue-providers-hybris.spec
+rpm/dhd/helpers/build_packages.sh -i
 
 #cat $ANDROID_ROOT/droid-hal-$DEVICE.log
