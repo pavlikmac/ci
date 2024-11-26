@@ -42,6 +42,8 @@ mkdir -p /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/
 cp /home/mersdk/work/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true
 cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true #who is the real path
 
+sudo mkdir -p /proc/sys/fs/binfmt_misc/
+sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh -i
 
 #cat $ANDROID_ROOT/droid-hal-$DEVICE.log
