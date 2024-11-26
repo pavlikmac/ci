@@ -28,7 +28,7 @@ git clone https://github.com/mer-hybris/geoclue-providers-hybris $ANDROID_ROOT/h
 cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 git checkout 0.2.35
 
-sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper in -y ccache
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 
 cd $ANDROID_ROOT/rpm/dhd/helpers
 cp /home/mersdk/work/ci/ci/helpers/build_packages.sh .
