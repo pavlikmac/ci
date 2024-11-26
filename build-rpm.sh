@@ -16,7 +16,7 @@ sudo ln -s /srv/mer/targets/SailfishOS-$SAILFISH_VERSION-$PORT_ARCH /srv/mer/tar
 sudo ln -s /srv/mer/toolings/SailfishOS-$SAILFISH_VERSION /srv/mer/toolings/$VENDOR-$DEVICE
 
 # 3.3.0.16 hack
-sudo zypper in -y kmod 
+sudo zypper in -y kmod ccache
 #sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R chmod 777 /boot
 
 sdk-assistant list
@@ -33,6 +33,7 @@ curl -LO https://github.com/Sailfish-On-Vince/ci/raw/refs/heads/master/dhd.patch
 git config --global user.email "ci@github.com"
 git config --global user.name "Github Actions"
 git am --signoff < dhd.patch && rm dhd.patch
+
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh || true
 rpm/dhd/helpers/build_packages.sh -b hybirs/mw/geoclue-providers-hybris -s rpm/geoclue-providers-hybris.spec
@@ -45,5 +46,3 @@ cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh -i
-
-#cat $ANDROID_ROOT/droid-hal-$DEVICE.log
