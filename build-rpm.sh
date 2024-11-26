@@ -28,15 +28,11 @@ git clone https://github.com/mer-hybris/geoclue-providers-hybris $ANDROID_ROOT/h
 cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
 git checkout 0.2.35
 
-cd $ANDROID_ROOT/rpm/dhd
-curl -LO https://github.com/Sailfish-On-Vince/ci/raw/refs/heads/master/dhd.patch
-git config --global user.email "ci@github.com"
-git config --global user.name "Github Actions"
-git am --signoff < dhd.patch && rm dhd.patch
+cd $ANDROID_ROOT/rpm/dhd/helpers
+cp /home/mersdk/work/ci/ci/helpers/build_packages.sh .
+chmod +x build_packages.sh 
 
 cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh || true
-rpm/dhd/helpers/build_packages.sh -b hybirs/mw/geoclue-providers-hybris -s rpm/geoclue-providers-hybris.spec
 
 #hack too
 mkdir -p /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/
@@ -45,4 +41,4 @@ cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/
 
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
-rpm/dhd/helpers/build_packages.sh -i
+rpm/dhd/helpers/build_packages.sh
