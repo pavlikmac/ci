@@ -40,5 +40,7 @@ sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh
 
 if [ "$?" -ne 0 ];then
+  # if failed, retry once
+  rpm/dhd/helpers/build_packages.sh
   cat $ANDROID_ROOT/droid-hal-vince.log
 fi

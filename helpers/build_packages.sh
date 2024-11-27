@@ -360,11 +360,12 @@ if [ "$BUILDVERSION" = "1" ]; then
 fi
 
 if [ "$BUILDIMAGE" = "1" ]; then
-    #hack, why?
-    mkdir -p $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/
-    cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks
     srcks="$ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts"
     ks="Jolla-@RELEASE@-$DEVICE-@ARCH@.ks"
+    #hack, why?
+    mkdir -p $srcks
+    cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks $srcks/$ks
+
     if sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH ssu s 2>/dev/null | grep -q "Release (rnd): latest (devel)"; then
         bleeding_edge_build_by_sailors=1
     fi
