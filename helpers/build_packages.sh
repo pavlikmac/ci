@@ -286,7 +286,7 @@ if [ "$BUILDMW" = "1" ]; then
                     -s rpm/sensorfw-qt5-hybris.spec || die
         fi
         if [ $android_version_major -le 7 ]; then
-            buildmw -Nu "https://github.com/Sailfish-On-Vince/geoclue-providers-hybris" \
+            buildmw -u "https://github.com/Sailfish-On-Vince/geoclue-providers-hybris" \
                     -s rpm/geoclue-providers-hybris.spec || die
         fi
         # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself
@@ -360,6 +360,9 @@ if [ "$BUILDVERSION" = "1" ]; then
 fi
 
 if [ "$BUILDIMAGE" = "1" ]; then
+    #hack, why?
+    mkdir -p $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/
+    cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks
     srcks="$ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts"
     ks="Jolla-@RELEASE@-$DEVICE-@ARCH@.ks"
     if sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH ssu s 2>/dev/null | grep -q "Release (rnd): latest (devel)"; then

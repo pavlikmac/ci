@@ -33,13 +33,12 @@ chmod +x rpm/dhd/helpers/build_packages.sh
 
 cd $ANDROID_ROOT
 
-#hack too
-mkdir -p /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/
-cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true
+
 
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh
 
-
-cat $ANDROID_ROOT/droid-hal-vince.log
+if [ "$?" -ne 0 ];then
+  cat $ANDROID_ROOT/droid-hal-vince.log
+fi
