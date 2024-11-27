@@ -13,6 +13,9 @@ on:
     branches: 
       - master
 
+permissions:
+  contents: write
+
 jobs:
 
   build:
@@ -164,5 +167,10 @@ jobs:
     - name : Upload flashable zip
       uses: actions/upload-artifact@master
       with:
-        name: sailfishos.zip
+        name: sailfishos-${{env.DEVICE}}.zip
         path: ${{env.ANDROID_ROOT}}/SailfishOScommunity-release-*/sailfishos-*-${{env.DEVICE}}*.zip
+    
+    - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{env.ANDROID_ROOT}}/SailfishOScommunity-release-*/sailfishos-*-${{env.DEVICE}}*.zip
