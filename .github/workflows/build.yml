@@ -108,6 +108,7 @@ jobs:
     - name: Clone device spec source
       run: |
         source hadk.env
+        cd $ANDROID_ROOT
         repo sync -j8 -c --no-clone-bundle --no-tags #rerun once
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-boot.git $ANDROID_ROOT/hybris/hybris-boot
