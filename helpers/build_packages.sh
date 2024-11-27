@@ -279,14 +279,14 @@ if [ "$BUILDMW" = "1" ]; then
             buildmw -u "https://github.com/mer-hybris/pulseaudio-modules-droid.git" || die
         fi
         buildmw -u "https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git" || die
-        buildmw -u "https://github.com/mer-hybris/mce-plugin-libhybris" || die
+        buildmw -u "https://github.com/Sailfish-On-Vince/mce-plugin-libhybris" || die
         buildmw -u "https://github.com/mer-hybris/qt5-qpa-hwcomposer-plugin" || die
         if [ $android_version_major -le 8 ]; then
             buildmw -u "https://github.com/sailfishos/sensorfw.git" \
                     -s rpm/sensorfw-qt5-hybris.spec || die
         fi
         if [ $android_version_major -le 7 ]; then
-            buildmw -Nu "https://github.com/mer-hybris/geoclue-providers-hybris" \
+            buildmw -Nu "https://github.com/Sailfish-On-Vince/geoclue-providers-hybris" \
                     -s rpm/geoclue-providers-hybris.spec || die
         fi
         # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself

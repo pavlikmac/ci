@@ -24,10 +24,6 @@ sdk-assistant list
 cd $ANDROID_ROOT
 sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify_kernel_config
 
-git clone https://github.com/mer-hybris/geoclue-providers-hybris $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
-cd $ANDROID_ROOT/hybirs/mw/geoclue-providers-hybris
-git checkout 0.2.35
-
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 
 cd $ANDROID_ROOT
@@ -44,5 +40,6 @@ cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh
+
 
 cat $ANDROID_ROOT/droid-hal-vince.log
