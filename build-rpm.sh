@@ -30,17 +30,19 @@ git checkout 0.2.35
 
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 
-cd $ANDROID_ROOT/rpm/dhd/helpers
-cp /home/mersdk/work/ci/ci/helpers/build_packages.sh .
-chmod +x build_packages.sh 
+cd $ANDROID_ROOT
+
+cp /home/mersdk/work/ci/ci/helpers/build_packages.sh rpm/dhd/helpers/
+chmod +x rpm/dhd/helpers/build_packages.sh 
 
 cd $ANDROID_ROOT
 
 #hack too
 mkdir -p /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/
-cp /home/mersdk/work/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true
-cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true #who is the real path
+cp /home/mersdk/work/ci/ci/Jolla-@RELEASE@-vince-@ARCH@.ks /home/mersdk/work/ci/ci/hadk_14.1/hybris/droid-configs/installroot/usr/share/kickstarts/ || true
 
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 rpm/dhd/helpers/build_packages.sh
+
+cat $ANDROID_ROOT/droid-hal-vince.log
