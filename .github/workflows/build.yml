@@ -164,13 +164,8 @@ jobs:
         name: droid-local-repo.zip
         path: ${{env.ANDROID_ROOT}}/droid-local-repo
 
-    - name : Upload flashable zip
-      uses: actions/upload-artifact@master
-      with:
-        name: sailfishos-${{env.DEVICE}}.zip
-        path: ${{env.ANDROID_ROOT}}/SailfishOScommunity-release-*/sailfishos-*-${{env.DEVICE}}*.zip
-    
     - name: Release
       uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         files: ${{env.ANDROID_ROOT}}/SailfishOScommunity-release-*/sailfishos-*-${{env.DEVICE}}*.zip

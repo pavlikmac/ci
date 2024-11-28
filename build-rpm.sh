@@ -27,13 +27,13 @@ sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 
 cd $ANDROID_ROOT
-
 cp /home/mersdk/work/ci/ci/helpers/build_packages.sh rpm/dhd/helpers/
 chmod +x rpm/dhd/helpers/build_packages.sh 
 
 cd $ANDROID_ROOT
-
-
+# move it to here
+# Add vince lost libs
+cp device/xiaomi/vince/lostlibs/*.so out/target/product/vince/system/lib/
 
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
