@@ -124,9 +124,9 @@ jobs:
       id: build-cache
       with:
         path: ${{env.ANDROID_ROOT}}/out
-        key: build-hal-${{ hashFiles('kernel/xiaomi/msm8953/arch/arm64/configs/vince_defconfig') }}
+        key: build-hal-${{github.ref}}-${{ hashFiles('kernel/xiaomi/msm8953/arch/arm64/configs/vince_defconfig') }}
         restore-keys: |
-          build-hal-
+          build-hal-${{github.ref}}
 
     - name: Build HAL
       if: steps.build-cache.outputs.cache-hit != 'true'
