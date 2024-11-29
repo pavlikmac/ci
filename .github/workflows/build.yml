@@ -9,9 +9,6 @@ name: Build SailfishOS dhd
 on: 
   release:
     types: [published]
-  push:
-    branches: 
-      - master
 
 permissions:
   contents: write

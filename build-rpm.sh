@@ -37,6 +37,11 @@ cp device/xiaomi/vince/lostlibs/*.so out/target/product/vince/system/lib/
 
 sudo mkdir -p /proc/sys/fs/binfmt_misc/
 sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+
+
+#64 bit is different
+rm hybris/droid-configs/sparse/usr/bin/droid/droid-hal-startup.sh
+
 rpm/dhd/helpers/build_packages.sh
 
 if [ "$?" -ne 0 ];then
