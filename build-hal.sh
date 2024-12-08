@@ -23,5 +23,22 @@ echo 'FORCE_HAL:=1' >> external/droidmedia/env.mk
 echo 'MINIMEDIA_AUDIOPOLICYSERVICE_ENABLE := 1' >> external/droidmedia/env.mk
 echo 'AUDIOPOLICYSERVICE_ENABLE := 1' >> external/droidmedia/env.mk
 
+
+git config --global user.email "ci@github.com"
+git config --global user.name "Github Actions"
+
+
+# kernel
+# update defconfig
+cd $ANDROID_ROOT/kernel/xiaomi/msm8953
+echo 'CONFIG_QFMT_V2=y
+CONFIG_IP_NF_MATCH_RPFILTER=y
+CONFIG_NETFILTER_XT_MATCH_SCTP=y
+CONFIG_QUOTA_NETLINK_INTERFACE=y' >> arch/arm64/configs/mido_defconfig
+git add -u
+git commit -m "update defconfig"
+cd $ANDROID_ROOT
+
+
 make -j$(nproc --all) hybris-hal droidmedia
 
