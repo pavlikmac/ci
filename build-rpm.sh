@@ -30,10 +30,10 @@ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 cd $ANDROID_ROOT
 cd rpm/dhd
 git pull origin master
-git checkout dfd6932be88d3874b0f65f127862672c609dc1cc
+git checkout 960d6af856c1ccc082d6a078c402d5d04ce2791e
 cp /home/mersdk/work/ci/ci/helpers/*.sh $ANDROID_ROOT/rpm/dhd/helpers/
 chmod +x $ANDROID_ROOT/rpm/dhd/helpers/*.sh 
-
+cp /home/mersdk/work/ci/ci/droid-hal-mido.spec $ANDROID_ROOT/rpm/
 
 # update dhc submodule
 cd $ANDROID_ROOT/hybris/droid-configs/droid-configs-device

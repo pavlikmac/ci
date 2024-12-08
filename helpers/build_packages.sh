@@ -286,7 +286,7 @@ if [ "$BUILDMW" = "1" ]; then
             buildmw -u "https://github.com/mer-hybris/pulseaudio-modules-droid.git" || die
         fi
         buildmw -u "https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git" || die
-        buildmw -u "https://github.com/Sailfish-On-Vince/mce-plugin-libhybris" || die
+        buildmw -u "https://github.com/mer-hybris/mce-plugin-libhybris" || die
         buildmw -u "https://github.com/mer-hybris/qt5-qpa-hwcomposer-plugin" || die
         if [ $android_version_major -le 8 ]; then
             buildmw -u "https://github.com/sailfishos/sensorfw.git" \
@@ -296,15 +296,6 @@ if [ "$BUILDMW" = "1" ]; then
             buildmw -u "https://github.com/mer-hybris/geoclue-providers-hybris" \
                     -s rpm/geoclue-providers-hybris.spec -r 0.2.35|| die
         fi
-        # build kf5bluezqt-bluez4 if not yet provided by Sailfish OS itself
-        #sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper se kf5bluezqt-bluez4 > /dev/null
-        #ret=$?
-        #if [ $ret -eq 104 ]; then
-        #    buildmw -u "https://github.com/sailfishos/kf5bluezqt.git" \
-        #            -s rpm/kf5bluezqt-bluez4.spec || die
-        #    # pull device's bluez4 configs correctly
-        #    sdk-assistant maintain $VENDOR-$DEVICE-$PORT_ARCH zypper remove bluez-configs-mer
-        #fi
     fi
 fi
 
