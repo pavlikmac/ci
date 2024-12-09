@@ -105,7 +105,7 @@ jobs:
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-vince/hybris-boot.git $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-vince/hybris-installer.git $ANDROID_ROOT/hybris/hybris-installer
-        git clone --recurse-submodules https://github.com/piggz/droid-hal-mido.git $ANDROID_ROOT/rpm 
+        git clone --recurse-submodules https://github.com/Sailfish-On-vince/droid-hal-vince.git -b for_mido $ANDROID_ROOT/rpm 
         git clone --recurse-submodules https://github.com/0312birdzhang/droid-config-mido.git $ANDROID_ROOT/hybris/droid-configs
         git clone --recurse-submodules https://github.com/piggz/droid-hal-version-mido.git $ANDROID_ROOT/hybris/droid-hal-version-mido
         rm -rf $ANDROID_ROOT/external/droidmedia
