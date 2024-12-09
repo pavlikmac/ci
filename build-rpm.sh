@@ -31,13 +31,10 @@ cd $ANDROID_ROOT
 cp /home/mersdk/work/ci/ci/helpers/*.sh $ANDROID_ROOT/rpm/dhd/helpers/
 chmod +x $ANDROID_ROOT/rpm/dhd/helpers/*.sh
 
-# update dhc submodule
-# cd $ANDROID_ROOT/hybris/droid-configs/droid-configs-device
-# git pull origin master
-# git checkout 0664f1a4ba7248332f5e3addb5ef3e63789452bd
 
-cd $ANDROID_ROOT/droid-hal-version-mido
+cd $ANDROID_ROOT/hybris/droid-hal-version-mido/droid-hal-version
 git pull origin master
+git checkout 83d8431d8acb9626dbca4e06842775247d6cf1e7
 
 cd $ANDROID_ROOT
 # Add mido lost libs
