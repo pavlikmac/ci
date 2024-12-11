@@ -32,6 +32,8 @@ git checkout 365b0f45755f20e4cba6e97d981f908cc1b0bb09
 cp /home/mersdk/work/ci/ci/helpers/*.sh $ANDROID_ROOT/rpm/dhd/helpers/
 chmod +x $ANDROID_ROOT/rpm/dhd/helpers/*.sh
 
+# dhc for 64bit
+rm $ANDROID_ROOT/hybris/droid-configs/sparse/usr/bin/droid/droid-hal-startup.sh
 
 cd $ANDROID_ROOT/hybris/droid-hal-version-mido/droid-hal-version
 git pull origin master

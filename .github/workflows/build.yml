@@ -121,7 +121,7 @@ jobs:
           build-hal-
 
     - name: Build HAL
-      if: steps.build-cache.outputs.cache-hit != 'true'
+      # if: steps.build-cache.outputs.cache-hit != 'true'
       run: |
         chmod +x build-hal.sh
         sudo ln -sf /usr/bin/python2.7 /usr/bin/python
