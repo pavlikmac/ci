@@ -17,7 +17,7 @@ sudo ln -s /srv/mer/toolings/SailfishOS-$SAILFISH_VERSION /srv/mer/toolings/$VEN
 
 # 3.3.0.16 hack
 sudo zypper in -y kmod ccache dos2unix
-#sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R chmod 777 /boot
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in python -y
 
 sdk-assistant list
 
@@ -27,13 +27,8 @@ sed -i '/CONFIG_NETFILTER_XT_MATCH_QTAGUID/d' hybris/mer-kernel-check/mer_verify
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in -y ccache
 
 # dhd
-cd $ANDROID_ROOT/rpm/dhd
-git checkout 365b0f45755f20e4cba6e97d981f908cc1b0bb09
 cp /home/mersdk/work/ci/ci/helpers/*.sh $ANDROID_ROOT/rpm/dhd/helpers/
 chmod +x $ANDROID_ROOT/rpm/dhd/helpers/*.sh
-
-# dhc for 64bit
-rm $ANDROID_ROOT/hybris/droid-configs/sparse/usr/bin/droid/droid-hal-startup.sh
 
 cd $ANDROID_ROOT/hybris/droid-hal-version-mido/droid-hal-version
 git pull origin master
