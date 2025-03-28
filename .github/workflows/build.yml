@@ -25,7 +25,7 @@ jobs:
       DEVICE: mido
       VENDOR: xiaomi
       ANDROID_ROOT: /home/runner/work/ci/ci/hadk_14.1/
-      SAILFISH_SDK_VERSION: 5.0.0.61
+      SAILFISH_SDK_VERSION: latest
 
     steps:
     - name: Maximize build space
