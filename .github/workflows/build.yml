@@ -25,7 +25,7 @@ jobs:
       DEVICE: mido
       VENDOR: xiaomi
       ANDROID_ROOT: /home/runner/work/ci/ci/hadk_14.1/
-      SAILFISH_SDK_VERSION: 4.5.0.16
+      SAILFISH_SDK_VERSION: 5.0.0.61
 
     steps:
     - name: Maximize build space
@@ -116,9 +116,9 @@ jobs:
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-boot.git $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-installer.git $ANDROID_ROOT/hybris/hybris-installer
-        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-mido.git $ANDROID_ROOT/rpm 
+        git clone --recurse-submodules https://github.com/piggz/droid-hal-mido.git $ANDROID_ROOT/rpm 
         git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-config-mido.git $ANDROID_ROOT/hybris/droid-configs
-        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-mido.git $ANDROID_ROOT/hybris/droid-hal-version-vince
+        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-mido.git $ANDROID_ROOT/hybris/droid-hal-version-mido
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
 
