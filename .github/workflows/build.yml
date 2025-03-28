@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      DEVICE: vince
+      DEVICE: mido
       VENDOR: xiaomi
       ANDROID_ROOT: /home/runner/work/ci/ci/hadk_14.1/
       SAILFISH_SDK_VERSION: 4.5.0.16
@@ -104,8 +104,8 @@ jobs:
         cd $ANDROID_ROOT
         repo init -u https://github.com/mer-hybris/android.git -b hybris-14.1 --depth=1
         repo sync -j8 -c --no-clone-bundle --no-tags
-        git clone https://github.com/Sailfish-On-Vince/device_xiaomi_vince.git $ANDROID_ROOT/device/xiaomi/vince --depth=1 
-        git clone https://github.com/Sailfish-On-Vince/vendor_xiaomi_vince.git $ANDROID_ROOT/vendor/xiaomi/vince --depth=1
+        git clone https://github.com/Sailfish-On-Vince/device_xiaomi_mido.git $ANDROID_ROOT/device/xiaomi/mido --depth=1 
+        git clone https://github.com/Sailfish-On-Vince/vendor_xiaomi_mido.git $ANDROID_ROOT/vendor/xiaomi/mido --depth=1
         git clone https://github.com/Sailfish-On-Vince/Xiaomi_Kernel_OpenSource.git $ANDROID_ROOT/kernel/xiaomi/msm8953 --depth=1
     
     - name: Clone device spec source
@@ -116,9 +116,9 @@ jobs:
         rm -rf $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-boot.git $ANDROID_ROOT/hybris/hybris-boot
         git clone https://github.com/Sailfish-On-Vince/hybris-installer.git $ANDROID_ROOT/hybris/hybris-installer
-        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-vince.git $ANDROID_ROOT/rpm 
-        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-config-vince.git $ANDROID_ROOT/hybris/droid-configs
-        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-vince.git $ANDROID_ROOT/hybris/droid-hal-version-vince
+        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-mido.git $ANDROID_ROOT/rpm 
+        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-config-mido.git $ANDROID_ROOT/hybris/droid-configs
+        git clone --recurse-submodules https://github.com/Sailfish-On-Vince/droid-hal-version-mido.git $ANDROID_ROOT/hybris/droid-hal-version-vince
         rm -rf $ANDROID_ROOT/external/droidmedia
         git clone https://github.com/sailfishos/droidmedia.git $ANDROID_ROOT/external/droidmedia
 
@@ -127,7 +127,7 @@ jobs:
       id: build-cache
       with:
         path: ${{env.ANDROID_ROOT}}/out
-        key: build-hal-${{ hashFiles('kernel/xiaomi/msm8953/arch/arm64/configs/vince_defconfig') }}
+        key: build-hal-${{ hashFiles('kernel/xiaomi/msm8953/arch/arm64/configs/mido_defconfig') }}
         restore-keys: |
           build-hal-
 
